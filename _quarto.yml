@@ -22,6 +22,8 @@ book:
   
   chapters:
     - index.qmd
+    #- hw/hw0.qmd
+    #- hw/hw1.qmd
 
     - part: "Best Work"
       chapters: 
@@ -33,7 +35,7 @@ book:
 
     - part: "In-class Activities"
       chapters: 
-      - ice/quarto-demo.qmd
+      - ica/quarto-demo.qmd
       - ica/ica-uni.qmd
       - ica/ica-bi.qmd
       - ica/ica-multi.qmd
