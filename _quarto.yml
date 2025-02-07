@@ -4,7 +4,7 @@ project:
 
 book:
   title: "COMP/STAT112 Notebook"
-  author: "Your Name Here"
+  author: "Ava A. H. Ortiz"
   date: today
   reader-mode: true
   page-navigation: true
@@ -13,7 +13,7 @@ book:
   
   
   sidebar:
-    title: "Your Name Here"
+    title: "Ava A. H. Ortiz"
     collapse-level: 2
     style: "docked"
     pinned: true
@@ -22,6 +22,8 @@ book:
   
   chapters:
     - index.qmd
+    #- hw/hw0.qmd
+    #- hw/hw1.qmd
 
     - part: "Best Work"
       chapters: 
@@ -33,6 +35,7 @@ book:
 
     - part: "In-class Activities"
       chapters: 
+      - ica/quarto-demo.qmd
       - ica/ica-uni.qmd
       - ica/ica-bi.qmd
       - ica/ica-multi.qmd
