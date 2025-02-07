@@ -192,11 +192,16 @@ We'll use this data to explore voting outcomes within the U.S.'s 2-party system.
 
 How many, or roughly what percent, of the 3000+ counties did the Republican candidate win in 2020?
 
--   Take a guess.
+-   Take a guess. *Maybe 45%*
 -   Then make a plot of the `winner` variable.
--   Then discuss what follow-up questions you might have (and that our data might help us answer).
+-   Then discuss what follow-up questions you might have (and that our data might help us answer). *This data could help answer questions pertaining to the comparison of how each party did in terms of county votes in 2020. This could help inform decisions in future election cycles and determine where deficites in certain campaigns are lying.*
 
 ```{r}
+library(tidyverse)
+ggplot(elections, aes(x = winner_20)) +
+  geom_bar() +
+  labs(x = "County Winner in 2020", y = "County Number")
+  
 ```
 
 #### Part b {.unnumbered}
@@ -205,9 +210,11 @@ The `repub_pct_20` variable provides more detail about the Republican support in
 
 Notice that the distribution of Republican support from county to county is slightly **left skewed** or **negatively skewed**.
 
-What follow-up questions do you have?
+What follow-up questions do you have? *Does a "left skewed" histogram mean that the values on the left dip as compared to the values further down the x-axis?*
 
 ```{r}
+ggplot(elections, aes(x = repub_pct_20))+
+  geom_histogram()
 ```
 
 
@@ -232,6 +239,8 @@ Try to replicate this using `ggplot()`. THINK:
 ![](https://mac-stat.github.io/images/112/scatterplot_demo.png){width="50%"}
 
 ```{r}
+#ggplot(elections, aes(x = repub_pct_16), aes(y = repub_pct_20))+
+#geom_scatterplot()
 ```
 
 
@@ -241,7 +250,7 @@ Run each chunk below to build up a a scatterplot of `repub_pct_20` vs `repub_pct
 
 ```{r eval = FALSE}
 # Set up the plotting frame
-# How does this differ than the frame for our histogram of repub_pct_20 alone?
+# How does this differ than the frame for our histogram of repub_pct_20 alone? *This frame is bivariate, meaning it places two variables on the same frame.*
 ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16))
 ```
 
@@ -254,7 +263,7 @@ ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
 
 ```{r eval = FALSE}
 # Change the shape of the points
-# What happens if you change the shape to another number?
+# What happens if you change the shape to another number? *The shape representing each data point changes froma dot to a '+' sign.*
 ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
   geom_point(shape = 3)
 ```
@@ -263,7 +272,8 @@ ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
 # YOU TRY: Modify the code to make the points "orange"
 # NOTE: Try to anticipate if "color" or "fill" will be useful here. Then try both.
 ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
-  geom_point()
+  geom_point(color = "orange")
+  
 ```
 
 ```{r eval = FALSE}
@@ -278,9 +288,9 @@ ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
 
 Summarize the relationship between the Republican support in 2020 and 2016. Be sure to comment on:
 
--   the strength of the relationship (weak/moderate/strong)\
--   the direction of the relationship (positive/negative)\
--   outliers (in what state do counties deviate from the national trend? Any ideas why this might be the case?)
+-   The strength of the relationship (weak/moderate/strong) *This indicates a strong relationship, meaning that the two different years show a clear relationship as the values form a linear line (indicating consistency between the years).*
+-   The direction of the relationship (positive/negative)\ *The relationship is positive.*
+-   Outliers (in what state do counties deviate from the national trend? Any ideas why this might be the case?) *Texas deviates the most, this may be due to an increase in republican support in the state over the intervening years between each election.*
 
 
 ### Exercise 4: Visualizing trend {.unnumbered}
@@ -298,6 +308,8 @@ ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
 Construct a new plot that contains the model smooth but does *not* include the individual point glyphs.
 
 ```{r}
+ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
+  geom_smooth()
 ```
 
 #### Part b {.unnumbered}
@@ -313,15 +325,16 @@ ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
 
 ### Exercise 5: Your Turn {.unnumbered}
 
-To examine how the 2020 results are related to some county demographics, construct scatterplots of `repub_pct_20` vs `median_rent`, and `repub_pct_20` vs `median_age`. Summarize the relationship between these two variables and comment on which is the better predictor of `repub_pct_20`, `median_rent` or `median_age`.
+To examine how the 2020 results are related to some county demographics, construct scatterplots of `repub_pct_20` vs `median_rent`, and `repub_pct_20` vs `median_age`. Summarize the relationship between these two variables and comment on which is the better predictor of `repub_pct_20`, `median_rent` or `median_age`. *The relationship between the median rent and county votes is left skewed and indicates a correlation between lower rent and voting for the republican party. The relationship with median age is a bit less clear, though it may indicate some slight relationship between middle-age voters and voting for the republican party in this election.*
 
 ```{r}
 # Scatterplot of repub_pct_20 vs median_rent
-
-
+ggplot(elections, aes(y = median_rent, x = repub_pct_20))+
+  geom_point()
 
 # Scatterplot of repub_pct_20 vs median_age
-
+ggplot(elections, aes(y = median_age, x = repub_pct_20))+
+  geom_point()
 
 
 ```
@@ -329,7 +342,7 @@ To examine how the 2020 results are related to some county demographics, constru
 
 ### Exercise 6: A Sad Scatterplot {.unnumbered}
 
-Next, let's explore the relationship between a county's 2020 Republican support `repub_pct_20` and the `historical` political trends in its state. In this case `repub_pct_20` is **quantitative**, but `historical` is **categorical**. Explain why a scatterplot might *not* be an effective visualization for exploring this relationship. (What questions does / doesn't it help answer?)
+Next, let's explore the relationship between a county's 2020 Republican support `repub_pct_20` and the `historical` political trends in its state. In this case `repub_pct_20` is **quantitative**, but `historical` is **categorical**. Explain why a scatterplot might *not* be an effective visualization for exploring this relationship. (What questions does / doesn't it help answer?) *This separates the categories, not showing much of a relationship visually between the two. It struggles to correlate historical trends with data from the modern election, and is difficult to glean meaning from.*
 
 ```{r}
 ggplot(elections, aes(y = repub_pct_20, x = historical)) +
@@ -385,7 +398,7 @@ ggplot(elections, aes(x = repub_pct_20)) +
 Work through the chunks below and address the comments therein.
 
 ```{r eval = FALSE}
-# Name two "bad" things about this plot
+# Name two "bad" things about this plot *1. There is no overlap between the categories, meaning the relationship between each is not clear to see. 2. The colors of the chart and the key do not alugn, making it less intuitive or easy to read.* 
 ggplot(elections, aes(x = repub_pct_20, fill = historical)) +
   geom_density()
 ```
