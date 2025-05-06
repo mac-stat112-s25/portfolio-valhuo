@@ -3,3 +3,45 @@ title: "Spatial Viz"
 ---
 
 Use this file to generate a professional looking **spatial** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r}
+library(tidyverse)
+library(RColorBrewer)
+library(extrafont)
+
+elections_by_state <-  read.csv("https://mac-stat.github.io/data/election_2020_by_state.csv")
+elections_by_counties <- read.csv("https://mac-stat.github.io/data/election_2020_county.csv")
+
+elections_by_state <- elections_by_state |> 
+  filter(state_abbr != "DC") |> 
+  select(state_name, state_abbr, repub_pct_20) |> 
+  mutate(repub_20_categories = 
+           cut(repub_pct_20, 
+               breaks = seq(30, 70, by = 5), 
+               labels = c("30-34", "35-39", "40-44", "45-49",
+                          "50-54", "55-59", "60-64", "65-70"), 
+               include.lowest = TRUE))
+
+elections_by_counties <- elections_by_counties |> 
+  select(state_name, state_abbr, county_name, county_fips,
+          repub_pct_20, median_age, median_rent) |> 
+  mutate(repub_20_categories = 
+           cut(repub_pct_20, 
+               breaks = seq(0, 100, by = 10),
+               labels = c("0-9", "10-19", "20-29", "30-39", "40-49",
+                          "50-59", "60-69", "70-79", "80-89", "90-100"),
+               include.lowest = TRUE))
+
+states_map <- map_data("state")
+```
+```{r}
+#| fig-cap: "This map visulaizes the population percentages by state of Republicans. The data used for this mapping can be found at https://mac-stat.github.io/data/election_2020_by_state.csv"
+#| fig-alt: "This visualization is a choropleth map, with the base map being a map of the U.S. with just the state borders shown. The elections data used was mapped using color, red associated with the Republican party and blue with the Democratic. The states that are more red showed a higher Republican population, while more blue states show a higher Blue population. The mapping shows that red states are mostly concentrated in Central or Southern regions of the country, while the states closer to the west or east coasts are shown to be more blue."
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  scale_fill_manual(values = rev(brewer.pal(8, "RdBu")), name = "% Republican")+
+  labs(title = "The Republican Population Percentage by State in the U.S.")+
+  theme(text=element_text(size=12, family="Times New Roman"))
+```
+

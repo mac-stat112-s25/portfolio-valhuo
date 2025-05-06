@@ -43,7 +43,7 @@ weather <- read.csv("https://mac-stat.github.io/data/weather_3_locations.csv") |
 # What are the units of observation?
 head(weather)
 
-The units of observation are the date, location, minimum temperature, maximum temperature, rainfall, evaporation 
+#The units of observation are the date, location, minimum temperature, maximum temperature, rainfall, evaporation 
 
 # How many data points do we have? 
 
@@ -230,7 +230,7 @@ ggplot(weather, aes(y = temp3pm, x = temp9am)) +
 
 ```
 
-### Example 6 {-}
+### Example 6 
 
 ```{r}
 # Change the code in order to construct a line plot of temp3pm vs date for each separate location (no points!)
@@ -276,7 +276,6 @@ There's no end to the number and type of visualizations you *could* make. And it
 
 ## Exercises (required)
 
-{{< include activity-instructions.qmd >}}
 
 ### The story {-}
 

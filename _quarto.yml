@@ -32,7 +32,15 @@ book:
       - bw/bw-tri.qmd
       - bw/bw-quad.qmd
       - bw/bw-spatial.qmd
+      - bw/Exam1.qmd
+      - bw/Exam2.qmd
+      - bw/SoloProject.qmd
 
+    - part: "Summaries"
+      chapters:
+      - Summary/Exam1_Summary.qmd
+      - Summary/Exam2_Summary.qmd
+    
     - part: "In-class Activities"
       chapters: 
       - ica/quarto-demo.qmd
@@ -40,6 +48,14 @@ book:
       - ica/ica-bi.qmd
       - ica/ica-multi.qmd
       - ica/ica-spatial.qmd
+      - ica/ica-wrangling.qmd
+      - ica/ica-dates.qmd
+      - ica/ica-reshaping.qmd
+      - ica/ica-joining.qmd
+      - ica/ica-factors.qmd
+      - ica/ica-Strings.qmd
+      - ica/ica-dataimport.qmd
+    
 
 format:
   html:
@@ -54,11 +70,15 @@ format:
     code-link: true
     code-line-numbers: true
     code-tools: true
+    code-fold: true
 
 execute:
+  echo: true
+  warning: false
+  error: false
   cache: false
   freeze: auto
-
+    
 editor: 
   markdown:
     wrap: sentence # Forces each sentence to be on its own line in source markdown, however, it doesn't affect how it is rendered

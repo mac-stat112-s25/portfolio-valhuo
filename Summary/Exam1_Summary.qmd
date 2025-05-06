@@ -1,0 +1,15 @@
+---
+title: "Exam 1 Summary"
+format: html
+---
+
+<IMG SRC="Data_Science_Summary-1.png" width="800" height="1000">
+
+
+
+
+
+
+
+
+

@@ -3,3 +3,23 @@ title: "Bivariate Viz"
 ---
 
 Use this file to generate a professional looking **bivariate** visualization.  The visualization will not perfect the first time but you are expected to improve it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r}
+library(tidyverse)
+library(extrafont)
+```
+
+
+```{r}
+elections <- read.csv("https://mac-stat.github.io/data/election_2020_county.csv")
+```
+
+```{r}
+#| fig-cap: "This chart visualizes and compares data by county on the amount of Republican support that was received in the 2016 and 2020 elections. The data that was used can be found at https://mac-stat.github.io/data/election_2020_county.csv ."
+#| fig-alt: "The visualization is a scatterplot with markers of not dots but state abbreviations. The plot has the republican support numbers in 2016 on the x-axis, and the number from 2020 on the y-axis. The results show a positive and generally constant relationship between the years, with outliers found to mainly be Texas, Utah, and Idaho that increased their support between the election cycles."
+ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
+  geom_text(aes(label = state_abbr))+
+  labs(x = "Republican Support in 2016", y = "Republican Support in 2020", title = "Republican Support by County in 2016 vs. 2020 Presidential Elections")+
+  theme(text=element_text(size=12, family="Times New Roman"))
+```
+

@@ -320,6 +320,8 @@ By default, `geom_smooth()` adds a smooth, localized model line. To examine the 
 ggplot(elections, aes(y = repub_pct_20, x = repub_pct_16)) +
   geom_point() +
   geom_smooth(method = "lm")
+
+class(elections)
 ```
 
 
