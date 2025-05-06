@@ -1,0 +1,14 @@
+---
+title: "Exam 2 Summary"
+format: html
+---
+
+<IMG SRC="Data Science Summary 2 (1)/Data_Science Summary_2-1.png" width="800" height="1000">
+
+<IMG SRC="Data Science Summary 2 (1)/Data_Science_Summary_2-2.png" width="800" height="1000">
+
+<IMG SRC="Data Science Summary 2 (1)/Data_Science_Summary_2-3.png" width="800" height="1000">
+
+<IMG SRC="Data Science Summary 2 (1)/Data_Science_Summary_2-4.png" width="800" height="1000">
+
+

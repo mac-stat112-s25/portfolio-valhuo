@@ -3,3 +3,22 @@ title: "Univariate Viz"
 ---
 
 Use this file to generate a professional looking **univariate** visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+```{r}
+survey <- read.csv("https://hash-mac.github.io/stat112site-s25/data/survey.csv")
+
+library(tidyverse)
+library(extrafont)
+```
+
+
+```{r}
+#| fig-cap: "This chart visualizes the responses to a survey question 'How long does it take you to get to campus?'. This chart shows the frequency of various travel times based on the number of responses received for each option. The data used can be found at https://hash-mac.github.io/stat112site-s25/data/survey.csv"
+#| fig-alt: "The visualization is a histogram of the responses received from Macalester students on how long it takes them to get to campus. The results show that most students have a travel time of 0-5 minutes, but that the range can go up to 20 minutes at most based on the responses."
+
+ggplot(survey, aes(x = minutes_to_campus)) +
+  geom_histogram(fill = rgb(1, 0.6, 0), col = "black", binwidth = 5) +
+  labs(x = "Travel Time (Minutes)", y = "Number of Responses", title = "Macalester Students' Travel Time to Campus")+
+  theme(text=element_text(size=14, family="Times New Roman"))
+```
+

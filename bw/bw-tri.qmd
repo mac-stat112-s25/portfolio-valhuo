@@ -3,3 +3,26 @@ title: "Trivariate Viz"
 ---
 
 Use this file to generate a professional looking **trivariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+```{r}
+library(tidyverse)
+library(extrafont)
+library(mosaic)
+data("Birthdays")
+daily_births <- Birthdays |> 
+  group_by(date) |> 
+  summarize(births = sum(births)) |> 
+  mutate(year = year(date), 
+         month = month(date, label = TRUE),
+         day_of_month = mday(date),
+         day_of_week = wday(date, label = TRUE))
+```
+
+```{r}
+#| fig-cap: "This figure vlusualizes the daily U.S. births from 1969 to 1988, and the relationship they have with days of the week. The data used for this figure can be found in the mosaic package."
+#| fig-alt: "This figure is a tri-variate scatterplot that shows the relationship between the number of daily births, the year, and the day of the week in the U.S. from 1969 to 1988. The figure shows a decline in births from the beginning to the end of the year for every year, but also shows a diverging point between the number of births on weekends verses weekdays that began about 1972."
+ggplot(daily_births, aes(y = births, x = date, color = day_of_week))+
+  geom_point()+
+  labs(x = "Year", y = "Number of Births Per Day", title = "Number of U.S. Births by Day of Week From 1969 to 1988", color = "Day of Week")+
+  theme(text=element_text(size=12, family="Times New Roman"))
+```
+

@@ -1,0 +1,41 @@
+---
+title: "Exam 1"
+format: html
+---
+
+```{r}
+# install.packages("tidytuesdayR")
+# install.packages("tidyverse")
+```
+
+```{r}
+library(tidytuesdayR)
+library(tidyverse)
+library(RColorBrewer)
+library(extrafont)
+```
+
+```{r}
+tuesdata <- tt_load('2020-02-18')
+fc <- tuesdata$food_consumption
+```
+
+```{r}
+nrow(fc)
+ncol(fc)
+head(fc)
+names(fc)
+summary(fc)
+```
+```{r}
+#| fig-cap: "This chart visulaizes the consumption of various food categories in each country. The data used for this table can be found at tidytuesday food_consumption."
+#| fig-alt: "This visualization is a tile chart, with the countries on the y-axis and the food catgories on the x-axis. The chart shows that the food category with the highest consumption are dairy products, and the lowest are nuts and soybeans."
+#| fig-height: 20
+#| fig-width: 20
+
+ggplot(fc, aes(y = country, x = food_category, fill = consumption))+
+  geom_tile()+
+  labs(x = "Food Category", y = "Country", title = "Food Category Consumption by Country", color = "Consumption")+
+  theme(text=element_text(size=12, family="Times New Roman"))
+```
+

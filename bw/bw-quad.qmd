@@ -3,3 +3,30 @@ title: "Quadvariate Viz"
 ---
 
 Use this file to generate a professional looking **quadvariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+```{r}
+library(tidyverse)
+library(fivethirtyeight)
+library(viridisLite)
+```
+
+
+```{r}
+data(bechdel)
+new_bechdel <- bechdel |>
+  mutate(clean_test = factor(clean_test, c("nowomen", "notalk", "men", "dubious", "ok"))) |>
+  mutate(half_decades = cut(year, breaks = seq(1969, 2014, by = 5)))
+```
+
+```{r}
+#| fig-cap: "This figure shows both the relationship between budget and domestic gross for U.S. movies in 2013, and the relationship this has with whether or not the movie passes the Bechdel test. The data used for this figure was used from the fivethirtyeight package."
+#| fig-alt: "This visualization is a quad-variate scatterplot that plots data on U.S. films in 2013. The variables observed were the movie budgets in USD, the domestic gross of the movies in USD, whether the movie passes the Bechdel test or not, and the titles of the individual films. The data shows a slightly positive relationship between budget and gross earnings, but also that most outliers are movies with low budgets and high gross earnings, such as Star Wars. The other outlier factor seems to be the Bechdel test result, with movies that pass the result tending to earn slighlty more than would be expected based on their budget."
+ggplot(new_bechdel, aes(x = budget_2013, y = domgross_2013, color = binary))+
+  geom_text(aes(label = title))+
+  geom_smooth()+
+  labs(x = "Movie Budget (USD)", y = "Domestic Gross Earnings (USD)", color = "Bechdel Test Result", title = "U.S. Movies That Do and Do Not Pass the Bechdel Test")+
+  theme(caption= "caption")+
+  theme(text=element_text(size=12, family="Times New Roman"))+
+  scale_color_viridis_d()
+  
+```
+

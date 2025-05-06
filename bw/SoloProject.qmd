@@ -1,0 +1,43 @@
+---
+title: "Solo Project"
+format: html
+---
+
+```{r}
+library(tidytuesdayR)
+library(rnaturalearth)
+library(sf)
+library(tidyverse)
+
+texas_aligned <- read.csv("../data/Texas_Counties_GIS_Data_Final.csv")
+
+texas_shapes <- read_sf("../data/cb_2023_48_bg_500k/cb_2023_48_bg_500k.shp")
+
+texas_data <- read.csv("../data/2022-04-registries-main/data/states/texas/TX_full.csv")
+
+```
+
+```{r}
+ntexas_shapes <- texas_shapes|>
+  mutate(FIPS = paste(STATEFP, COUNTYFP, sep = ","))
+
+full_data <- ntexas_shapes|>
+  mutate(FIPS = paste(STATEFP, COUNTYFP, sep = ","))|>
+  select(FIPS, geometry)|>
+  left_join(texas_aligned %>% select(County, FIPS))|>
+  left_join(texas_data %>% select(County, Disposition) %>% count(County))|>
+  select(geometry, n)
+
+```
+
+
+```{r}
+#| fig-cap: "This chart visualizes the result of filed child abuse charges in the state of Texas by county."
+#| fig-alt: "The visualization is a chloropleth map of the result of filed child abuse charges in the state of Texas by county. The results show that cases are localized, with higher numbers in high-density areas."
+
+ggplot(full_data)+
+  geom_sf(aes(fill = n))+
+  theme_void()
+  
+```
+
