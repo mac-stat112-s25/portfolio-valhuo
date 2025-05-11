@@ -10,7 +10,7 @@ book:
   page-navigation: true
   back-to-top-navigation: true
   bread-crumbs: true
-  
+
   
   sidebar:
     title: "Ava A. H. Ortiz"
@@ -22,8 +22,6 @@ book:
   
   chapters:
     - index.qmd
-    #- hw/hw0.qmd
-    #- hw/hw1.qmd
 
     - part: "Best Work"
       chapters: 
