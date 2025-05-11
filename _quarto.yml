@@ -54,7 +54,6 @@ book:
       - ica/ica-Strings.qmd
       - ica/ica-dataimport.qmd
     
-
 format:
   html:
     theme:
